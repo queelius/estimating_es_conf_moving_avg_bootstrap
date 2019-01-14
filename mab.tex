@@ -1,6 +1,6 @@
 % This file was converted to LaTeX by Writer2LaTeX ver. 1.6.1
 % see http://writer2latex.sourceforge.net for more info
-\documentclass[letterpaper]{article}
+\documentclass[letterpaper,twocolumn,9pt]{article}
 \usepackage[ascii]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb,amsfonts,textcomp}
@@ -65,66 +65,41 @@
 \renewcommand\labelitemiii{[F096?]}
 \renewcommand\labelitemiv{[F096?]}
 }
-\title{}
-\author{Alex Towell}
-\date{2019-01-14}
+\title{
+    Estimating Confidentiality of Encrypted Searches using a Moving Average 
+    Bootstrap Method
+}
+\author{Alexander Towell and Hiroshi Fujinoki}
+\date{2016-12-30}
 \begin{document}
-\clearpage\clearpage\pagestyle{MP}
-{\centering\rmfamily
-Estimating Confidentiality of Encrypted Searches using a Moving Average 
-Bootstrap Method
-\par}
+\begin{abstract}
+    Frequency attacks are a type of attacks adversaries perform to 
+    encrypted searches. Adversaries guess the meaning of the encrypted words by 
+    observing a large number of encrypted words and map the encrypted words to 
+    guessed plain-text words using their known histogram. This paper\ applies 
+    an approach of resilience engineering in studying how effective encrypted 
+    searches will be for protecting users' privacy when they perform oblivious 
+    searches, i.e., searches\ on their encrypted data. For estimating the 
+    number of encrypted words an adversary needs to observe before the 
+    adversary correctly guesses a  certain percentage of the observed words 
+    with\ a certain confidence, we developed and evaluated Moving Average 
+    Bootstrap (MAB) method. In the experiments\ we performed, we observed that 
+    MAB method reliably and accurately estimated in 5\% of the time a defender 
+    would have to wait before the defender could calculate the estimator.
+\end{abstract}
 
-
-\bigskip
-
-{\centering\rmfamily
-Alexander A.\ Towell\ and Hiroshi Fujinoki
-\par}
-
-{\centering\rmfamily
 Department of Computer Science
-\par}
-
-{\centering\rmfamily
 Southern Illinois University Edwardsville
-\par}
-
-{\centering\rmfamily
 Edwardsville, IL 62026-1656\newline
 +1 618 650 3727
-\par}
-
-{\centering
-\textrm{\{}\textrm{\textit{atowell}}\textrm{,\ }\textrm{\textit{hfujino}}\textrm{\}@}\textrm{\textit{siue}}\textrm{.}\textrm{\textit{edu}}
-\par}
+{atowell,hfujino}@siue.edu
 
 
-\bigskip
+Categories and Subject Descriptors
 
-\begin{multicols}{2}
-{\rmfamily\bfseries
-ABSTRACT}
-
-\textrm{Frequency attacks are\ a type of attacks adversaries perform to encrypted searches. \ Adversaries guess the
-meaning of the encrypted words by\ }\textrm{\textcolor{black}{observing a large number of encrypted words and map the
-encrypted words to guessed plain\ text\ words using their known histogram.\ This paper\ applies an approach of
-resilience engineering in studying how effective encrypted searches will be for protecting users' privacy when they
-perform oblivious searches, i.e., searches\ on their encrypted data.\ \ For estimating the number of encrypted
-words\ (}}\textrm{\textit{\textcolor{black}{N}}}\textrm{\textcolor{black}{*)\ an adversary needs to observe\ before the
-adversary correctly guesses a certain percentage of the observed words with\ a certain confidence, we developed and
-evaluated Moving Average Bootstrap (MAB) method. \ In\ the\ experiments\ we performed, we observed that MAB method
-reliably\ accurately estimated\ }}\textrm{\textit{\textcolor{black}{N}}}\textrm{\textcolor{black}{* in 5\% of the time
-a defender would have to wait before the defender could calculate the estimator
-(}}\textrm{\textit{\textcolor{black}{N}}}\textrm{\textcolor{black}{*).}}
-
-
-\bigskip
-
-{\rmfamily\bfseries\color{black}
-Categories and Subject Descriptors}
-
-\textrm{\textcolor{black}{H.3.3 [}}\textrm{\textbf{\textcolor{black}{Information Systems}}}\textrm{\textcolor{black}{]:
+\textrm{\textcolor{black}{H.3.3 
+[}}\textrm{\textbf{\textcolor{black}{Information 
+Systems}}}\textrm{\textcolor{black}{]:
 Information Search and Retrieval - Information filtering; Relevance feedback; Search process;\ }}
 
 \textrm{\textcolor{black}{E.2 [}}\textrm{\textbf{\textcolor{black}{Data}}}\textrm{\textcolor{black}{]: Data
@@ -898,5 +873,4 @@ Application,''\ }}\textrm{\textit{\textcolor{black}{Technometrics}}}\textrm{\tex
 \textrm{\textcolor{black}{[17]\ \ Resilience Engineering Association, ``About Resilience Engineering,''
 URL:\ }}\textrm{\textit{\textcolor{black}{http://www.
 resilience-engineering-association.org}}}\textrm{\textcolor{black}{/ (last\ accessed on February 16, 2015).}}
-\end{multicols}
 \end{document}
