@@ -1,0 +1,62 @@
+Q1: On page 6 of the attached paper, for the definition of "k (conjectured
+sample size for population set)", you chose k = 5,000.
+      Can you write a brief justification for why the number (5,000) was
+chosen (or how we justify 5,000 was large enough).
+----------------------
+Okay, so, first, k is 5000 because the simulation took time to run,
+and doing more would take too long on my desktop computer.
+
+That's the primary reason. So, we ran k = 5000 trials, each trial
+being an independent simulation where millions (tens of millions)
+of encrypted query words were submitted, and the adversary
+observed this stream of query words and mounted a frequency
+analysis attack.
+
+So, the question is, is 5,000 enough? It seems so based
+on the 95% confidence intervals. For example, out of 5000 trials,
+for theta = 0.05 given p* = 0.3, on figure 9, we see that 95% of all
+N* values are between 7550 and 6300. The question is, are we
+happy with the size of this 95% CI? If we are, then we are done.
+If we collect an even larger sample, the 95% CI is expected to
+shrink, which is good, but if we're already happy with the current
+95% CI, then it's not worth our time to invest more time and energy
+into collecting a larger sample to make the 95% CI interval
+even smaller.
+
+So, some justification for this. First, we can't be sure that had we ran
+the experiment for 1000 more trials, we wouldn't get something very
+different, e.g., if each of those 1000 trials generated N* values
+significantly above the range [6300, 7550], then our 95% CI would be
+very different. But, intuitively, this isn't likely, right?
+
+A statistic applied to a sample of random variables that are independent,
+identically distributed converge to a normal distribution as the sample
+size increases to infinity, and the larger the sample the more like the
+normal curve it is expected to be. The mean statistic's variance is
+proportional to 1/n * var(X), if the sample consists of n X variables. We
+don't have such an easy closed-form solution for out statistic,
+the quantile, since it is nonlinear / discontinuous, but a sample of
+them converge to normality also. Thus, a larger sample is expected
+to TIGHTEN the 95% CI, e.g., [6300, 7550] -> [6500, 7400]. The
+question we must ask is this: are we HAPPY with the confidence
+intervals we have already acquired after 5000 trials? If we are, then
+we have little reason to continue to invest more time and energy
+to acquire a larger sample that will make the CI even smaller.
+------------------------
+
+Q2: Regarding the CDF's for the population and empirical distributions
+(especially for m = 250 in Figure 8(c), is it possible for you to quantify
+how close the CDF for the empirical distribution was to the one for the
+population distribution?  If you can, it will be GREATLY help our paper to
+improve its quality.
+------------------------
+I will apply a goodness-of-fit test. Pending.
+
+
+R (request) 1: Will it take time for you to change the color of the CDF for
+the population (currently in red) to black (similarly, the one for the
+empirical distribution, currently in right green to black) in Figure 8 (a),
+(b), and (c)?
+----------------------
+Done.
+----------------------

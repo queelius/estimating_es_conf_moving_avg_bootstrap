@@ -1,0 +1,54 @@
+Definitions:
+	- trapdoor(term): plain text term mapped (crytpographically hashed) to trapdoor(term)
+	- N: the number of trapdoors observed -- sample size
+	- (p, N): the proportion of observed trapdoors the adversary can accurately map to plain text terms after observing N trapdoors
+	- (p*, N*): a smoothed out measure of the adversary's accuracy that ignores fluctuates in (p, N) 
+	
+On a graph in which the adversary's current accuracy level p is plotted against N, p will tend to increase with N but it may flucutate significantly on a small scale. The accuracy measure p* ignores these fluctuations and represents a stabilized accuracy level. Specifically, for a given accuracy level p*, its corresponding N* value will be the point at which the accuracy level p never dips below p*.
+
+When repeating this experiment multiple times, each p* will induce a distribution of N* values. N* (for a given p*, denoted N*|p*) is our conditional random variable of interest.
+
+Let f(n*|p*) represent the population's' probability mass function. If one element from N*|p* is selected "at random" from the population, then f(n*|p*) is the probability of selecting N* = n*|p*. The CDF, F(n*|p*), is F(n*|p*) = sum i = 0 to n* { f(i|p*) }.
+
+Knowing f, here are a few examples of what sort of questions we can ask about the population:
+
+	(1) The mean of N*|p* is E(N*|p*) = sum { i = -infinity to infinity { i * f(i|p*) } }
+	(2) The probability that N*|p* is greater than a and less than or equal to b is P[a < N*|p* <= b] = F(b|p*) - F(a|p*)
+	(3) The median of N*|p* is F(n*|p*) = 0.5 => n* = Q(0.5|p*), where Q is the quantile function (inverse of CDF F)
+			=> The k quantile (kth percentile) is just n* = Q(k|p*)
+
+Our primary interest is with the quantile function Q.
+
+However, we do not know f and we do not have access to the entire population to determine f. The best information we have about the population is contained in our sample from the population. Thus, we use this sample to estimate Q(k|p*).
+
+We use the Bootstrap method to estimate (with confidence intervals) the quantile function Q. Here is the procedure:
+
+	(1) Acquire (through simulating the adversary) a sample of size M (that is, there are M elements of N* values for a specified p* value)
+	(2) Use the sample to construct the empirical CDF F_m(n*|p*) as an estimate of the population CDF F(n*|p*)
+	(3) Sample (with replacement) from empirical CDF F_m to generate another sample of size M, denoted S. Thus, S contains M N* values, randomly selected from the empirical CDF.
+	(4) Apply some statistic of interest to sample S. Our primary interest is with quantiles, i.e., we are worried about the following:
+	
+			- About how many trapdoors must the adversary observe to have a 5% probability of achieving accuray level p*? (where p* is chosen to be an unacceptable level of information disclosure).
+			  This is just n* = Q(0.05|p*).
+	
+	(5) We do this k times, that is, we generate k samples, S1, S2, ..., Sk, and apply the quantile statistic to each one to generate a distribution consisting of k quantiles. For instance, if we were interested in the 5th percentile, we would sort each sample Si in increasing order and then pick the n* element in Si at index j = round(M * 0.05). This element may take on different values in different samples Si, and thus we have a distribution consisting of k 5th percentiles
+	(6) To construct the 95% confidence interval, we throw out the bottom and top 2.5% of the elements in the distribution consisting of k 5th percentiles.
+	(7) We repeat steps 5 and 6 above for various percentiles of interest, e.g., 1st percentile, 50th percentile, and even 0.1th percentile if a 0.1% chance of the adversary achieving p* accuracy is too risky.
+	(8) We repeat steps 2 through 6 for various p* accuracy levels of interest, e.g., Q(k | p* = 0.25), Q(k | p* = 0.3), Q(k | p* = 0.35), ..., Q(k | p* = 0.6)
+
+Note: Having generated k quantiles (from S1, S2, ..., Sk), I also calculated the Q() confidence interval like so:
+
+	(a) Calculate the standard deviation of the k quantiles, denoted Sq
+	(b) Use Sq as an estimate of the population standard deviation
+	(c) Use the student t distribution to calculate the CI for a given k-quantile and p*, i.e.:
+	
+		u +- Sq / sqrt(M) * t_0.025(M-1)
+		
+		where u is the mean of the k quantiles and t is the student t function.
+		
+		This approach, which is still based on the Bootstrap method since we are
+		generating multiple samples from the empirical CDF, generated approximately
+		the same confidence interval as the primary approach I outlined above. However,
+		this approach forced the CI to be symmetric about u, which is not
+		necessarily the case.
+		
