@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software or methodology, please cite it as below."
+authors:
+  - family-names: "Towell"
+    given-names: "Alex"
+  - family-names: "Fujinoki"
+    given-names: "Hiroshi"
+title: "Estimating Confidentiality of Encrypted Searches using Moving Average Bootstrap"
+version: 1.0.0
+date-released: 2016-01-01
+url: "https://github.com/spinoza/estimating_es_conf_moving_avg_bootstrap"
+repository-code: "https://github.com/spinoza/estimating_es_conf_moving_avg_bootstrap"
+keywords:
+  - encrypted search
+  - bootstrap method
+  - confidence intervals
+  - privacy analysis
+  - cryptographic trapdoors
+  - moving average
+  - statistical analysis
+abstract: >
+  This research presents a methodology for estimating confidence intervals when 
+  analyzing the confidentiality of encrypted database searches. Using moving average 
+  bootstrap techniques, we model an adversary's ability to map encrypted trapdoors 
+  to plaintext terms based on frequency analysis. The bootstrap method provides 
+  robust confidence intervals for quantifying information disclosure risks at 
+  various accuracy thresholds.
+license: MIT
